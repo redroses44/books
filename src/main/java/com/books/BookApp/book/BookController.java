@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.books.BookApp.rating.BookRating;
+
 @RestController
 public class BookController {
 	
@@ -29,9 +31,5 @@ public class BookController {
 		return bookService.getBooks();
 	}
 	
-	@GetMapping(value="/books/{id}")
-	public Optional<Book> getBook(@PathVariable("id") String bookId) {
-		return bookService.getBookById(bookId);
-	}
-
+	
 }

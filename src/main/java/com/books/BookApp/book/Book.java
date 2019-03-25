@@ -1,20 +1,26 @@
 package com.books.BookApp.book;
 
-import javax.persistence.Column;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.books.BookApp.rating.BookRating;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Book {
 	
 	
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
-	private String ISBN;
+	@Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer ISBN;
 	
 	private String title;
 	private String author;
@@ -24,7 +30,13 @@ public class Book {
 	private String mediumImageURL;
 	private String largeImageURL;
 	
-	public Book(String ISBN, String title, String author, Integer publicationYear, String publisher, String smallImageURL, String mediumImageURL, String largeImageURL) {
+	
+	@OneToMany(mappedBy="book", cascade=CascadeType.ALL)
+	@JsonIgnore
+
+	private List<BookRating> ratings;
+	
+	public Book(Integer ISBN, String title, String author, Integer publicationYear, String publisher, String smallImageURL, String mediumImageURL, String largeImageURL) {
 		this.ISBN = ISBN;
 		this.title = title;
 		this.author = author;
@@ -38,13 +50,24 @@ public class Book {
 	public Book() {
 		
 	}
-
-	public String getISBN() {
+	
+	public Integer getISBN() {
 		return ISBN;
+	}
+	
+	public void setRatings(List<BookRating> ratings) {
+		this.ratings = ratings;
+	}
+	public List<BookRating> getRatings() {
+		return ratings;
 	}
 
 	public String getTitle() {
 		return title;
+	}
+	
+	public void setISBN(Integer ISBN) {
+		this.ISBN = ISBN;
 	}
 
 	public String getAuthor() {
@@ -71,6 +94,4 @@ public class Book {
 		return largeImageURL;
 	}
 	
-	
-
 }
