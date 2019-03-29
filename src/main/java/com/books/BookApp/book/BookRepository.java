@@ -13,5 +13,12 @@ public interface BookRepository extends CrudRepository<Book, Integer>{
 	
 	@Override
 	public List<Book> findAll();
+	
+	
+
+
+	public Optional<Book> findByiSBN(String iSBN);
+
+
 
 }

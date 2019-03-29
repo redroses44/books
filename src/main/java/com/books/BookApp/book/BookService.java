@@ -25,8 +25,13 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 
-	public Optional<Book> getBookById(Integer iSBN) {
-		return bookRepository.findById(iSBN);
+	
+
+	public Optional<Book> getBookByISBN(String iSBN) {
+		return bookRepository.findByiSBN(iSBN);
 	}
+
+	
+
 
 }
