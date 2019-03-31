@@ -10,6 +10,7 @@ import Books from './Books';
 import BookDetails from './BookDetails';
 import AddBook from './AddBook';
 import EditBook from './EditBook';
+import RateBook from './RateBook';
 import Navbar from './Navbar';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/book/:isbn" component={BookDetails} />
           <Route exact path="/add" component={AddBook} />
           <Route exact path="/update/:isbn" component={EditBook} />
+          <Route exact path="/rate/:isbn" component={RateBook} />
         </Switch>
       </Router>
     );

@@ -26,7 +26,7 @@ public class BookService {
 	}
 
 	
-	public Book getBookByISBN(String iSBN) {
+	public Optional<Book> getBookByISBN(String iSBN) {
 		return bookRepository.findByiSBN(iSBN);
 	}
 

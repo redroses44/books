@@ -2,10 +2,16 @@ package com.books.BookApp.book;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,8 +22,9 @@ import com.books.BookApp.rating.BookRating;
 
 
 
+
 @Entity
-public class Book {
+public class Book implements Serializable {
 	
 	
 	@Id 
@@ -34,11 +41,11 @@ public class Book {
 	private String largeImageURL;
 	
 	
-	@OneToMany(mappedBy="book")
-	List<BookRating> ratings = new ArrayList<BookRating>();
+	@OneToMany(mappedBy="book", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Set<BookRating> ratings = new HashSet<>();
 	
 	
-	public Book(String iSBN, String title, String author, Integer publicationYear, String publisher, String smallImageURL, String mediumImageURL, String largeImageURL) {
+	public Book(String iSBN, String title, String author, Integer publicationYear, String publisher, String smallImageURL, String mediumImageURL, String largeImageURL, BookRating ...ratings) {
 		this.iSBN = iSBN;
 		this.title = title;
 		this.author = author;
@@ -49,14 +56,14 @@ public class Book {
 		this.largeImageURL = largeImageURL;
 	}
 	
-	public void setRatings(BookRating rating) {
-		if(rating.getISBN() == this.getiSBN()) {
-			ratings.add(rating);
-		}
+	
+
+	public Set<BookRating> getRatings() {
+		return ratings;
 	}
 	
-	public List<BookRating> getRatings() {
-		return ratings;
+	public void setRatings(Set<BookRating> ratings) {
+		this.ratings = ratings;
 	}
 	
 	public Book() {

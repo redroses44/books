@@ -1,17 +1,24 @@
 package com.books.BookApp.rating;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.books.BookApp.book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity	@IdClass(ProjectId.class)
-public class BookRating {
+public class BookRating implements Serializable {
 	
 	@Id
 	private long userId;
@@ -22,7 +29,9 @@ public class BookRating {
 	
 	private int bookRating;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="book_isbn")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Book book;
 	
 	
@@ -32,10 +41,13 @@ public class BookRating {
 		this.bookRating = bookRating;
 	}
 	
+	
+	@JsonIgnore
 	public void setBook(Book book) {
 		this.book = book;
 	}
 	
+	@JsonIgnore
 	public Book getBook() {
 		return book;
 	}

@@ -36,7 +36,7 @@ public class BookController {
 	}
 	@GetMapping(value="/books/{isbn}")
 	@CrossOrigin(origins = "*")
-	public Book getBook(@PathVariable("isbn") String iSBN) {
+	public Optional<Book> getBook(@PathVariable("isbn") String iSBN) {
 		return bookService.getBookByISBN(iSBN);
 	}
 	

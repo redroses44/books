@@ -21,7 +21,9 @@ class Books extends Component {
   render() {
     let bookItems;
     const { books } = this.state;
-    bookItems = books.map(book => <Book key={book.iSBN} books={book} />);
+    bookItems = books.map(book => (
+      <Book ratings={book.ratings} key={book.iSBN} books={book} />
+    ));
     return (
       <div>
         <div className="container">
