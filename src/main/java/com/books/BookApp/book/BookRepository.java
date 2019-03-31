@@ -17,8 +17,9 @@ public interface BookRepository extends CrudRepository<Book, Integer>{
 	
 
 
-	public Optional<Book> findByiSBN(String iSBN);
+	public Book findByiSBN(String iSBN);
 
+	public Optional<Book> deleteByiSBN(String iSBN);
 
 
 }

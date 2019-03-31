@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.books.BookApp.book.Book;
 
 @Entity	@IdClass(ProjectId.class)
 public class BookRating {
@@ -17,14 +20,24 @@ public class BookRating {
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String ISBN;
 	
-	
 	private int bookRating;
+	
+	@ManyToOne()
+	private Book book;
 	
 	
 	public BookRating(long userId, String ISBN, int bookRating) {
 		this.userId = userId;
 		this.ISBN = ISBN;
 		this.bookRating = bookRating;
+	}
+	
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	
+	public Book getBook() {
+		return book;
 	}
 	
 	

@@ -3,7 +3,10 @@ package com.books.BookApp.book;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,10 +36,15 @@ public class BookController {
 	}
 	@GetMapping(value="/books/{isbn}")
 	@CrossOrigin(origins = "*")
-	public Optional<Book> getBook(@PathVariable("isbn") String iSBN) {
+	public Book getBook(@PathVariable("isbn") String iSBN) {
 		return bookService.getBookByISBN(iSBN);
 	}
 	
-	
+	@Transactional
+	@DeleteMapping(value="/books/{isbn}")
+	@CrossOrigin(origins="*")
+	public Optional<Book> deleteBook(@PathVariable("isbn") String iSBN) {
+		return bookService.deleteBookByISBN(iSBN);
+	}
 	
 }

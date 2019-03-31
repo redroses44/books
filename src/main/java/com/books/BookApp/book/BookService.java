@@ -26,12 +26,13 @@ public class BookService {
 	}
 
 	
-
-	public Optional<Book> getBookByISBN(String iSBN) {
+	public Book getBookByISBN(String iSBN) {
 		return bookRepository.findByiSBN(iSBN);
 	}
 
-	
-
+	public Optional<Book> deleteBookByISBN(String iSBN) {
+		return bookRepository.deleteByiSBN(iSBN);
+		
+	}
 
 }

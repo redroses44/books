@@ -24,7 +24,6 @@ class BookDetails extends Component {
           <div className="card mt-5 col-6 mx-auto">
             <h2 className="card-header">{book.title}</h2>
             <div className="card-body">
-              <h5 className="card-title">{book.title}</h5>
               <p className="card-text lead">
                 Author : {book.author ? book.author : '-'}
               </p>

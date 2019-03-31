@@ -2,11 +2,17 @@ package com.books.BookApp.book;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.books.BookApp.rating.BookRating;
 
 
 
@@ -28,6 +34,10 @@ public class Book {
 	private String largeImageURL;
 	
 	
+	@OneToMany(mappedBy="book")
+	List<BookRating> ratings = new ArrayList<BookRating>();
+	
+	
 	public Book(String iSBN, String title, String author, Integer publicationYear, String publisher, String smallImageURL, String mediumImageURL, String largeImageURL) {
 		this.iSBN = iSBN;
 		this.title = title;
@@ -37,6 +47,16 @@ public class Book {
 		this.smallImageURL = smallImageURL;
 		this.mediumImageURL = mediumImageURL;
 		this.largeImageURL = largeImageURL;
+	}
+	
+	public void setRatings(BookRating rating) {
+		if(rating.getISBN() == this.getiSBN()) {
+			ratings.add(rating);
+		}
+	}
+	
+	public List<BookRating> getRatings() {
+		return ratings;
 	}
 	
 	public Book() {
@@ -77,6 +97,22 @@ public class Book {
 
 	public String getLargeImageURL() {
 		return largeImageURL;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public void setPublicationYear(Integer publicationYear) {
+		this.publicationYear = publicationYear;
+	}
+	public void setSmallImageURL(String smallImageURL) {
+		this.smallImageURL = smallImageURL;
 	}
 	
 }
