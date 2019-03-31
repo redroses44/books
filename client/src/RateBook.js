@@ -28,14 +28,18 @@ export class RateBook extends Component {
       bookRating: this.state.rate
     };
     e.preventDefault();
-    axios
-      .post(
-        `http://localhost:8080/${this.props.match.params.isbn}/bookrating`,
-        newRate
-      )
-      .then(response => {
-        this.props.history.push('/');
-      });
+    if (newRate.bookRating < 0 || newRate.bookRating > 10) {
+      alert('Value must be between 1 and 10.');
+    } else {
+      axios
+        .post(
+          `http://localhost:8080/${this.props.match.params.isbn}/bookrating`,
+          newRate
+        )
+        .then(response => {
+          this.props.history.push('/');
+        });
+    }
   };
   render() {
     const { isbn } = this.state;

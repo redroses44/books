@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -33,6 +34,15 @@ public class BookService {
 	public Optional<Book> deleteBookByISBN(String iSBN) {
 		return bookRepository.deleteByiSBN(iSBN);
 		
+	}
+	
+	public List<Book> findByRatings() {
+		List<Book> books = bookRepository.findAll(Sort.by(Sort.Direction.ASC, "ratings.bookRating"));
+		return books;
+	}
+	
+	public List<Book> findByOrderByBookRatingDesc() {
+		return bookRepository.findByOrderByRatingsDesc();
 	}
 
 }

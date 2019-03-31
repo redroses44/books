@@ -29,7 +29,7 @@ class Book extends Component {
           <p className="card-text lead">
             Rating :{' '}
             {books.ratings.length > 0
-              ? rating.toFixed(2)
+              ? rating.toFixed(1)
               : 'No Rating at the moment.'}
           </p>
           <Link to={`/book/${books.iSBN}`} className="btn btn-outline-dark">

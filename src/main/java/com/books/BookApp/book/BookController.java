@@ -2,6 +2,7 @@ package com.books.BookApp.book;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.books.BookApp.rating.BookRating;
 
 @RestController
 public class BookController {
@@ -45,6 +48,17 @@ public class BookController {
 	@CrossOrigin(origins="*")
 	public Optional<Book> deleteBook(@PathVariable("isbn") String iSBN) {
 		return bookService.deleteBookByISBN(iSBN);
+	}
+	
+	@GetMapping(value="/books/sorted/asc")
+	@CrossOrigin(origins = "*")
+	public List<Book> sortBooksAsc() {
+		return bookService.findByRatings();
+	}
+	@GetMapping(value="/books/sorted/desc")
+	@CrossOrigin(origins = "*")
+	public List<Book> sortBooksDesc() {
+		return bookService.findByOrderByBookRatingDesc();
 	}
 	
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Book from './Book';
+import SortingSelector from './SortingSelector';
 
 class Books extends Component {
   constructor() {
@@ -27,6 +28,7 @@ class Books extends Component {
     return (
       <div>
         <div className="container">
+          <SortingSelector />
           <div className="row p-4">{bookItems}</div>
         </div>
       </div>
