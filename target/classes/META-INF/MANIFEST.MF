@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Valeri
+Build-Jdk: 11.0.2
+Implementation-Title: BookApp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.books
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/BookApp
+Created-By: Maven Integration for Eclipse
+
