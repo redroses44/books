@@ -1,5 +1,7 @@
 # books
 
+* Java 11 required.
+
 git clone https://github.com/redroses44/books
 
 IntelliJ checkout from version control => git and enter https://github.com/redroses44/books
